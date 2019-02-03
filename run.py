@@ -242,7 +242,6 @@ class Game:
         self.del_cell_object(origin)
         self.gui.move_object(new_origin)
 
-
     def send_dir(self, d):
         if self.is_select_mode:
             self.move_selection(d)
