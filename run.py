@@ -144,13 +144,13 @@ class Game:
                     self.make_wall(i, j)
                 elif level[i][j] == 'X':
                     self.make_box(i, j)
-                elif level[i][j] == '.':
+                elif level[i][j] == '*':
                     assert player_point is None
                     player_point = (i, j)
                 elif level[i][j] == '@':
                     assert door_point is None
                     door_point = (i, j)
-                elif level[i][j] == ' ':
+                elif level[i][j] == '.':
                     pass
                 else:
                     assert False
@@ -370,13 +370,15 @@ class Game:
 
 
 class Window(Tkinter.Tk):
-    cell_size = 100
-    cell_selection_width = 10
-    player_pad = 10
-    player_selection_width = 10
-    origin_size = 30
-    origin_pad = 5
-    origin_selection_width = 5
+    scale = 3
+    cell_size = 20 * scale
+    cell_selection_width = 2 * scale
+    player_pad = 2 * scale
+    player_selection_width = 2 * scale
+    origin_size = 6 * scale
+    origin_pad = 1 * scale
+    origin_selection_width = 1 * scale
+    font_size = 15 * scale
     player_colors = ['yellow', 'sky blue', 'plum1', 'tan1']
 
     def __init__(self, level_path, *args, **kwargs):
@@ -395,7 +397,10 @@ class Window(Tkinter.Tk):
         self.game = Game(load_level(self.level_path), self)
 
     def win(self):
-        self.canvas.create_text(self.winfo_width() / 2, self.winfo_height() / 2, text="You Win", font=("Purisa", 64), fill='purple')
+        self.canvas.create_text(
+            self.winfo_width() / 2, self.winfo_height() / 2,
+            text="You Win", font=("Purisa", self.font_size), fill='purple'
+        )
 
     def set_grid(self, n, m):
         self.canvas = Tkinter.Canvas(self, width=m * self.cell_size, height=n * self.cell_size)

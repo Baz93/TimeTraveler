@@ -1,2 +1,5 @@
 .idea
 __pycache__
+*.bin
+/gen/a.in
+cmake-build-*
